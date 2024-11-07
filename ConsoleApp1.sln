@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp2", "ConsoleApp2\ConsoleApp2.csproj", "{8C0809DA-38B3-40FA-90D9-8F2BF845B3D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp3", "ConsoleApp3\ConsoleApp3.csproj", "{F1741DE7-0939-46C6-89BE-2DC634227A0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp3", "ConsoleApp3\ConsoleApp3.csproj", "{F1741DE7-0939-46C6-89BE-2DC634227A0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zad 5", "zad 5\zad 5.csproj", "{506F50AB-FF96-4CBB-A24C-0F620F627D8C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{F1741DE7-0939-46C6-89BE-2DC634227A0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1741DE7-0939-46C6-89BE-2DC634227A0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1741DE7-0939-46C6-89BE-2DC634227A0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{506F50AB-FF96-4CBB-A24C-0F620F627D8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{506F50AB-FF96-4CBB-A24C-0F620F627D8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{506F50AB-FF96-4CBB-A24C-0F620F627D8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{506F50AB-FF96-4CBB-A24C-0F620F627D8C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
