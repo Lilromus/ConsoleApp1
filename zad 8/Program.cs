@@ -50,24 +50,32 @@ public class Program
 
             Console.WriteLine("Czy chciałbys stworzyć kolejną postać?(Tak/Nie)");
             string wybor = Console.ReadLine();
-            if (wybor.Equals("Nie", StringComparison.OrdinalIgnoreCase) || wybor.StartsWith("N", StringComparison.OrdinalIgnoreCase))
+            if (wybor == "Nie")
             {
                 tworzenie = false;
             }
         }
     }
 
-    public static int PobierzWartosc(string komunikat, int min, int max)
+    public static int PobierzWartosc(string komunikat, int minimalnaWartosc, int maksymalnaWartosc)
     {
-        int wartosc;
+        int wprowadzonaWartosc;
         while (true)
         {
             Console.Write(komunikat);
-            if (int.TryParse(Console.ReadLine(), out wartosc) && wartosc >= min && wartosc <= max)
-                break;
-            Console.WriteLine($"Wartość musi być liczbą pomiędzy {min} a {max}.");
+            string wprowadzonyTekst = Console.ReadLine();
+            bool czyPoprawnaLiczba = int.TryParse(wprowadzonyTekst, out wprowadzonaWartosc);
+
+            if (czyPoprawnaLiczba && wprowadzonaWartosc >= minimalnaWartosc && wprowadzonaWartosc <= maksymalnaWartosc)
+            {
+                break; 
+            }
+            else
+            {
+                Console.WriteLine($"Wartość musi być liczbą pomiędzy {minimalnaWartosc} a {maksymalnaWartosc}.");
+            }
         }
-        return wartosc;
+        return wprowadzonaWartosc;
     }
 
     public static void WyswietlDaneGracza(Player player)
