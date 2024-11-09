@@ -17,8 +17,8 @@ public class Program
         Enemy enemy1 = new Enemy("Gradfl", "Goblin", 30, 50, 85, 0, true, 5.5, 10, 10);
         Enemy enemy2 = new Enemy("Blabpfl", "Golem", 25, 50, 85, 0, true, 0, 30, 5);
 
-        ICharacter decoratedEnemy1 = new PowerBoostDecorator(enemy1, 5.0);
-        ICharacter decoratedEnemy2 = new PowerBoostDecorator(enemy2, 5.0);
+        IPostac decoratedEnemy1 = new PowerBoostDekator(enemy1, 5.0);
+        IPostac decoratedEnemy2 = new PowerBoostDekator(enemy2, 5.0);
 
         Console.WriteLine("Stwórz swoją postać:");
         bool tworzenie = true;
@@ -101,13 +101,13 @@ public class Program
         player.WyswietlStaty();
     }
 
-    public static void WyswietlStatyEnemy(ICharacter enemy)
+    public static void WyswietlStatyEnemy(IPostac enemy)
     {
         enemy.WyswietlStaty();
     }
 }
 
-public class Player : ICharacter
+public class Player : IPostac
 {
     public string Imie { get; private set; }
     public string Klasa { get; private set; }
@@ -136,7 +136,7 @@ public class Player : ICharacter
     }
 }
 
-public class Enemy : ICharacter
+public class Enemy : IPostac
 {
     public string Imie { get; private set; }
     public string Klasa { get; private set; }
@@ -144,10 +144,10 @@ public class Enemy : ICharacter
     public double Mana { get; private set; }
     public double HP { get; private set; }
     public double Szczescie { get; private set; }
-    public bool Agresja { get; private set; }
+    public bool Agresja { get; private set; } //Gdy HP moba spada ponizej 40% to mob dostaje zwieksząną siłę
     public double LifeSteal { get; private set; }
-    public double APRes { get; private set; }
-    public double ADRes { get; private set; }
+    public double APRes { get; private set; } // vs atakom magicznym
+    public double ADRes { get; private set; } // vs atakom fizycznym
 
     public Enemy(string Imie, string Klasa, double Sila, double Mana, double HP, double Szczescie, bool Agresja, double LifeSteal, double APRes, double ADRes)
     {
@@ -169,7 +169,7 @@ public class Enemy : ICharacter
     }
 }
 
-public interface ICharacter
+public interface IPostac
 {
     string Imie { get; }
     string Klasa { get; }
@@ -180,33 +180,33 @@ public interface ICharacter
     void WyswietlStaty();
 }
 
-public abstract class CharacterDecorator : ICharacter
+public abstract class PostacDekator : IPostac
 {
-    protected ICharacter _character;
+    protected IPostac _postac;
 
-    public CharacterDecorator(ICharacter character)
+    public PostacDekator(IPostac postac)
     {
-        _character = character;
+        _postac = postac;
     }
 
-    public virtual string Imie => _character.Imie;
-    public virtual string Klasa => _character.Klasa;
-    public virtual double Sila => _character.Sila;
-    public virtual double Mana => _character.Mana;
-    public virtual double HP => _character.HP;
-    public virtual double Szczescie => _character.Szczescie;
+    public virtual string Imie => _postac.Imie;
+    public virtual string Klasa => _postac.Klasa;
+    public virtual double Sila => _postac.Sila;
+    public virtual double Mana => _postac.Mana;
+    public virtual double HP => _postac.HP;
+    public virtual double Szczescie => _postac.Szczescie;
 
     public virtual void WyswietlStaty()
     {
-        _character.WyswietlStaty();
+        _postac.WyswietlStaty();
     }
 }
 
-public class PowerBoostDecorator : CharacterDecorator
+public class PowerBoostDekator : PostacDekator
 {
     private double _boostAmount;
 
-    public PowerBoostDecorator(ICharacter character, double boostAmount) : base(character)
+    public PowerBoostDekator(IPostac character, double boostAmount) : base(character)
     {
         _boostAmount = boostAmount;
     }
@@ -215,18 +215,18 @@ public class PowerBoostDecorator : CharacterDecorator
     {
         get
         {
-            if (_character is Enemy enemy && enemy.HP < enemy.HP * 0.4)
+            if (_postac is Enemy enemy && enemy.HP < enemy.HP * 0.4)
             {
-                return _character.Sila + _boostAmount;
+                return _postac.Sila + _boostAmount;
             }
-            return _character.Sila;
+            return _postac.Sila;
         }
     }
 
     public override void WyswietlStaty()
     {
         base.WyswietlStaty();
-        if (_character is Enemy enemy && enemy.HP < enemy.HP * 0.4)
+        if (_postac is Enemy enemy && enemy.HP < enemy.HP * 0.4)
         {
             Console.WriteLine($"Agresja: Siła przeciwnika zwiększona o {_boostAmount}");
         }
